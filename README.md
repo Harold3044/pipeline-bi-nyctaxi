@@ -139,6 +139,25 @@ dim_pago (5)
 - **Dashboard 3 — Calidad de datos:** Anomalías, nulos y valores atípicos
 
 ---
+## ⚡ Simulación de Streaming
+
+El pipeline incluye una simulación de procesamiento en tiempo real usando
+**Spark Structured Streaming** con trigger `AvailableNow`, equivalente
+conceptualmente a un consumidor de Kafka.
+
+| Métrica | Resultado |
+|---|---|
+| **Input rate** | 5.7M registros/segundo |
+| **Processing rate** | 1.5M registros/segundo |
+| **Batch duration promedio** | 8.5 segundos |
+| **Total registros procesados** | 81,749,077 |
+| **Ingreso total procesado** | $1,552,049,274.15 |
+| **Tabla destino** | `proyecto_bi.gold.streaming_viajes` |
+
+El stream lee incrementalmente desde `proyecto_bi.silver.yellow_trips`
+y escribe en tiempo real sobre una tabla Delta Lake en Gold,
+demostrando el flujo completo de datos desde la fuente hasta
+la capa de consumo.
 
 ## Autores
 - Harold Solano
